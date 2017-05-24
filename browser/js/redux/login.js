@@ -26,8 +26,9 @@ export default function reducer (user = {}, action) { // setCurrentUser (Action 
 
 /* ------------       DISPATCHERS     ------------------ */
 
-export const verifyUser = () => dispatch => {
-  axios.post('/login')
+// returns a function that's invoked later by redux thunk
+export const verifyUser = (user) => dispatch => {
+  axios.post('/login', { email: user.email, password: user.password })
   .then(res => dispatch(setCurrentUser(res.data)))
   .catch(console.error);
 }
